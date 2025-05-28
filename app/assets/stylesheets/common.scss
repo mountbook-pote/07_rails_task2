@@ -1,0 +1,45 @@
+/*共通要素*/
+*{
+    box-sizing: border-box; 
+    /*border: 1px solid black;*/
+}  
+
+/*header要素*/
+header{
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.header_contents{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toppage_link{
+  color: white;
+  text-decoration: none;
+  font-size: 170%;
+}
+
+.toppage_link:hover{
+  color: white;
+}
+
+
+.login_and_signup_buttons{
+  display: flex;
+  gap: 10px;
+}
+
+body{
+    height: 100%;
+    width: 100%; 
+    margin: 0;
+    font-family: sans-serif;
+    background-color: rgba(245, 245, 245, 1);
+}
+
