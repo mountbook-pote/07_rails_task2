@@ -59,4 +59,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'concurrent-ruby', '1.3.4' #rails -vできない時に、1.3.5削除してインストールする
 
-gem 'psych', '~> 3.1' #webpackerインストールに必要
+gem 'psych', '~> 3.1' #webpackerインストールに必要なコード
