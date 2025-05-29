@@ -1,0 +1,17 @@
+<h1>アカウント</h1><br>
+
+  <%= link_to edit_user_registration_path, class: "btn btn-primary" , style:"color: white;" do %>
+  <i class="bi bi-pencil"></i> アカウント編集
+  <% end %>
+
+<h5>メールアドレス</h5>
+<%= @user.email %>
+
+<h5>パスワード</h5>
+<h5>*********</h5>
+
+<h5>名前</h5>
+<%= @user.name %>
+
+<h5>自己紹介</h5>
+<%= @user.profile%>

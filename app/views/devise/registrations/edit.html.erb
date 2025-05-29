@@ -1,43 +1,64 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <!--名前フォームを追加-->
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, placeholder: "ユーザー名を入力", autofocus: true, autocomplete: "name" %>
+    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :name %></div>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, placeholder: "メールアドレスを入力", autocomplete: "email" %>
+    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :email %></div>
   </div>
 
+  <!--プロフィールフォームを追加-->
+  <div class="field">
+    <%= f.label :profile %><br />
+    <%= f.text_area :profile, placeholder: "自己紹介を入力" %>
+    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :profile %></div>
+  </div>
+
+    <!--このコードはメルアド変更時のリンク踏み確認で、今回は関係ないみたい？-->
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+    <%= f.label :password, "変更用パスワード" %> <i>(※変更する場合のみ)</i><br />
+    <%= f.password_field :password, placeholder: "変更用パスワードを入力", autocomplete: "new-password" %>
+    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :password %></div>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :password_confirmation, "確認用パスワード" %> <i>(※変更する場合のみ)</i><br />
+    <%= f.password_field :password_confirmation, placeholder: "確認用パスワードを入力", autocomplete: "new-password" %>
+    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :password_confirmation %></div>
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.label :current_password %> <br />
+    <%= f.password_field :current_password, placeholder: "現在のパスワードを入力", autocomplete: "current-password" %>
+    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :current_password %></div>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "保存" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<%= link_to "キャンセル", :back %>
 
+<%
+=begin %>
+・アカウントを削除する項目。今回は表示しない。
+<h3>Cancel my account</h3>
 <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 
-<%= link_to "Back", :back %>
+・エラーをまとめて出すコード。使用しない。
+  <%= render "devise/shared/error_messages", resource: resource %>
+<%
+=end %>

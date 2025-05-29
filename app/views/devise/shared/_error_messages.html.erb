@@ -1,4 +1,14 @@
 <% if resource.errors.any? %>
+    <ul>
+      <% resource.errors.full_messages_for(attribute).each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+<%
+=begin %>
+元のコード
   <div id="error_explanation" data-turbo-cache="false">
     <h2>
       <%= I18n.t("errors.messages.not_saved",
@@ -12,4 +22,5 @@
       <% end %>
     </ul>
   </div>
-<% end %>
+<%  
+=end %>

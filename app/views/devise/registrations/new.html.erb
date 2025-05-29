@@ -1,35 +1,49 @@
 <h2>新規登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+
 
   <!--nameは後から追加した -->
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.label :name, "ユーザー名<span style='color: red;'>*</span>".html_safe %><br>
+    <%= f.text_field :name, placeholder: "ユーザー名を入力",autofocus: true, autocomplete: "name" %>
+    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :name %></div>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :email, "メールアドレス<span style='color: red;'>*</span>".html_safe %><br />
+    <%= f.email_field :email, placeholder: "メールアドレスを入力", autocomplete: "email" %>
+    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :email %></div>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, "パスワード<span style='color: red;'>*</span>".html_safe %>
     <% if @minimum_password_length %>
 
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, placeholder: "パスワードを入力", autocomplete: "new-password" %>
+    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :password %></div>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :password_confirmation, "確認用パスワード<span style='color: red;'>*</span>".html_safe %><br />
+    <%= f.password_field :password_confirmation, placeholder: "確認用パスワードを入力", autocomplete: "new-password" %>
+    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :password_confirmation %></div>
   </div>
 
   <div class="actions">
+    <br>
     <%= f.submit "新しいアカウントを作成" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+<%
+=begin %>
+以下は１箇所に全てのエラーを表示させる。
+<% resource.errors.full_messages_for(attribute).each do |message| %>
+のように、for(attribute)を付けてるとエラーになるみたい
+<%= render "devise/shared/error_messages", resource: resource %>
+<%
+=end %>
