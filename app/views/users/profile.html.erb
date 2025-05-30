@@ -1,0 +1,19 @@
+
+<%= render "shared/account_profile" %>
+
+<%= link_to users_edit_profile_path, class: "btn btn-primary" , style:"color: white;" do %>
+<i class="bi bi-pencil"></i> 編集
+<% end %>
+
+<h5>アイコン画像</h5>
+<%= render "shared/image_attached", size: 100 %>
+
+<h5>名前</h5>
+<%= @user.name %>
+
+<h5>自己紹介</h5>
+<%= @user.profile%>
+
+<% flash.each do |key, message| %>
+  <div class="flash <%= key %>"><%= message %></div>
+<% end %>

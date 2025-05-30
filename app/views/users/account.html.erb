@@ -1,0 +1,17 @@
+
+<%= render "shared/account_profile" %>
+
+<%= link_to edit_user_registration_path, class: "btn btn-primary" , style:"color: white;" do %>
+<i class="bi bi-pencil"></i> 編集
+<% end %>
+
+<h5>メールアドレス</h5>
+<%= @user.email %>
+
+<h5>パスワード</h5>
+<h5>*********</h5>
+
+<% flash.each do |key, message| %>
+  <div class="flash <%= key %>"><%= message %></div>
+<% end %>
+

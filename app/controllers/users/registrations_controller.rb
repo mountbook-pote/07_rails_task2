@@ -5,12 +5,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   before_action :configure_permitted_parameters
 
-  protected
+  def edit_profile
+    @user = current_user
+  end
 
+  def update_profile
+    @user = current_user
+    if @user.update_without_password(params.require(:user).permit(:image, :name, :profile))
+      redirect_to :users_profile, notice: "プロフィールを更新しました"
+    else
+      render "edit_profile" #, alert: "プロフィールの更新に失敗しました"
+    end
+  end
+
+
+  protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :profile])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :profile, :image])
   end
+
+
+
 
 
   # GET /resource/sign_up

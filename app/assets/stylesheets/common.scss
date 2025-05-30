@@ -2,6 +2,7 @@
 *{
     box-sizing: border-box; 
     /*border: 1px solid black;*/
+   
 }  
 
 /*header要素*/
@@ -43,6 +44,26 @@ body{
     background-color: rgba(245, 245, 245, 1);
 }
 
+/*ユーザー画像*/
+.rounded-header-image{
+   border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.rounded-image{
+   border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+/*アカウント設定内の項目*/
+.account-profile_buttons{
+  display: flex;
+  gap: 50px;
+}
 
 /*フォーム入力時のエラー*/
 .new-edit-error{
