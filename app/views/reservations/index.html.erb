@@ -1,0 +1,91 @@
+<h1>予約済み一覧</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th> <!-- 後でリンク先行けるよう修正-->
+      <th>紹介文</th>
+      <th>合計料金</th> <!-- 後で修正-->
+      <th>チェックイン</th>
+      <th>チェックアウト</th>
+      <th>予約確定日時</th>
+      <th>再予約</th>
+      <th><span style="color: red;">予約の削除</span></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= render "shared/room_image_attached", size: 80, obj: reservation.room %></td>
+        <td><%= link_to "#{reservation.room.name}", reservation.room %></td>
+        <td><%= reservation.room.content %></td>
+        <td>¥<%= number_with_delimiter(reservation.room.price)%>~</td>
+        <td><%= reservation.check_in.strftime("%Y/%m/%d") %></td>
+        <td><%= reservation.check_out.strftime("%Y/%m/%d") %></td>
+        <td><%= reservation.updated_at.strftime("%Y/%m/%d %H:%M") %></td>
+        <td><%= link_to "再予約", [:edit, reservation] %></td>
+        <td>
+        <!--削除ボタン表示コード-->
+          <button type="button" class="btn btn-link" 
+          data-bs-toggle="modal" data-bs-target="#exampleModal-<%= reservation.id %>">
+          削除</button>
+        </td>
+        <!--モーダル本体用のコード-->
+        <div class="modal " id="exampleModal-<%= reservation.id %>" tabindex="-1" aria-labelledby="exampleModalLabel-<%= reservation.id %>" aria-hidden="true">
+          <div class="modal-dialog ">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel-<%= reservation.id %>">予約を削除しますか？</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>ID<%=reservation.id %>:この予約を削除してよろしいですか？<br>この操作は取り消せません</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">キャンセル</button>
+                <%= link_to "削除", reservation, method: :delete, class: "btn btn-danger", style:"color: white;"%>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--モーダル用のコード終わり-->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%
+=begin %>
+<td><%= link_to "#{reservation.room.name}", room %></td>      
+        
+
+        <td><%= link_to "編集", [:edit, room] %></td>
+        <td>
+        <!--削除ボタン表示コード-->
+          <button type="button" class="btn btn-link" 
+          data-bs-toggle="modal" data-bs-target="#exampleModal-<%= room.id %>">
+          削除</button>
+        </td>
+        <!--モーダル本体用のコード-->
+        <div class="modal " id="exampleModal-<%= room.id %>" tabindex="-1" aria-labelledby="exampleModalLabel-<%= room.id %>" aria-hidden="true">
+          <div class="modal-dialog ">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel-<%= room.id %>">予定を削除しますか？</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>ID<%=room.id %>：<%= room.name %>を削除してよろしいですか？<br>この操作は取り消せません</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">キャンセル</button>
+                <%= link_to "削除", room, method: :delete, class: "btn btn-danger", style:"color: white;"%>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--モーダル用のコード終わり-->
+<%
+=end %>

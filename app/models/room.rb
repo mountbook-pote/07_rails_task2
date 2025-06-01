@@ -1,10 +1,12 @@
 class Room < ApplicationRecord
   belongs_to :user
-  validates :name, presence: true
-  validates :content, presence: true
-  validates :price, presence: true
+  has_many :reservations, dependent: :destroy
+
+  validates :name, presence: true, length: { maximum: 20 }
+  validates :content, presence: true, length: { maximum: 200 }
+  validates :price, presence: true, length: { maximum: 7 }
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
-  validates :adress, presence: true
+  validates :adress, presence: true, length: { maximum: 100 }
 
   #アイコン画像用のコード
   has_one_attached :image

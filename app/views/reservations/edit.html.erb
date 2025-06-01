@@ -1,35 +1,24 @@
-<h2>作成した施設の詳細/予約</h2>
-
-<h5><%= link_to "← 戻る", :back %></h5>
-<div>
-  <% if current_user == @room.user %>
-      <%= link_to "編集", [:edit, @room] %>
-  <% end %>
-</div>
+<h2>再予約する</h2>
 
 <!-- 施設画像を表示する-->
-<%= render "shared/room_image_attached", size: 300, obj: @room %>
+<%= render "shared/room_image_attached", size: 300, obj: @reservation.room %>
 
 <table class="table">
   <tr>
     <th>施設名</th>
-    <td><%= @room.name %></td>
+    <td><%= @reservation.room.name %></td>
   </tr>
   <tr>
     <th>料金</th>
-    <td>¥<%= number_with_delimiter(@room.price)%>~</td>
+    <td>¥<%= number_with_delimiter(@reservation.room.price)%>~</td>
   </tr>
   <tr>
     <th>紹介文</th>
-    <td><%= @room.content%></td>
-  </tr>
-  <tr>
-    <th>製作者ID</th>
-    <td><%= @room.user_id%></td>
+    <td><%= @reservation.room.content%></td>
   </tr>
 </table>
 
-<h3>予約フォーム</h3>
+<h3>再予約フォーム</h3>
 <%= form_with model: @reservation do |f| %>
   <div class="row">
     <div class="col-4">
@@ -48,9 +37,8 @@
       <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :number_of_people %></div>
     </div>
   </div>
-  <!-- current_userでuser_idは渡されるがroom_idはhidden必須。また、予約失敗時に、予約しようとしている施設のページに戻るためにも必要となるとのこと-->
-  <%= f.hidden_field :room_id, value: @room.id %>
+  <!--create時にroom_idは指定しているため、editではhiddenは不要となる -->
   <div>
-    <p><%= f.submit "予約する", class: "btn btn-primary", style:"color: white;"%></p>
+    <p><%= f.submit "再予約する", class: "btn btn-primary", style:"color: white;"%></p>
   </div>
 <% end %>

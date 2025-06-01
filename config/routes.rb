@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  get 'reservations/reservations'
   root 'homes#top'
+  #reservationモデル用のルーティング
+  resources :reservations
 
   #roomモデル用のルーティング
   get 'rooms/own', as: :rooms_own

@@ -32,6 +32,10 @@ ja:
         content: 施設詳細
         price: 料金
         adress: 住所
+      reservation:
+        check_in: チェックイン
+        check_out: チェックアウト
+        number_of_people: 人数
     models:
       user: ユーザー
   devise:

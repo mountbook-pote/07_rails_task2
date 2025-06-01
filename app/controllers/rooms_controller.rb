@@ -1,6 +1,5 @@
 class RoomsController < ApplicationController
-  #roomアクションで、常に@user = current_userを渡すためのコード
-  before_action :set_current_user
+  before_action :set_current_user   #roomアクションで、常に@user = current_userを渡すためのコード
   before_action :set_room, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
 
@@ -23,6 +22,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    @reservation = Reservation.new #ホテルの詳細画面を開くと予約の投稿枠ができる
   end
 
   def edit

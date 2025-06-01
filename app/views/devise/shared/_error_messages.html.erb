@@ -1,6 +1,6 @@
 <% if resource.errors.any? %>
   <ul>
-  <!--ビューファイル側のパーシャルで「attribute: :値」を外すと、全てのエラーが表示される -->
+  <!--ビューファイル側のパーシャルで「attribute: :値」を消すと、全てのエラーが表示される -->
     <% if defined?(attribute) && attribute %>
       <% resource.errors.full_messages_for(attribute).each do |message| %>
         <li><%= message %></li>
