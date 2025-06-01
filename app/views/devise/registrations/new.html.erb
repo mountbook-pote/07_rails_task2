@@ -1,7 +1,7 @@
 <h2>新規登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-
+<%= render "devise/shared/error_messages", resource: resource %>
 
   <!--nameは後から追加した -->
   <div class="field">
@@ -42,7 +42,7 @@
 <%
 =begin %>
 以下は１箇所に全てのエラーを表示させる。
-<% resource.errors.full_messages_for(attribute).each do |message| %>
+なお、<% resource.errors.full_messages_for(attribute).each do |message| %>
 のように、for(attribute)を付けてるとエラーになるみたい
 <%= render "devise/shared/error_messages", resource: resource %>
 <%

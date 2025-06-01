@@ -14,7 +14,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.update_without_password(params.require(:user).permit(:image, :name, :profile))
       redirect_to :users_profile, notice: "プロフィールを更新しました"
     else
-      render "edit_profile" #, alert: "プロフィールの更新に失敗しました"
+      flash.now[:alert] = "プロフィールの更新に失敗しました"
+      render "edit_profile"
     end
   end
 

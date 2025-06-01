@@ -1,17 +1,20 @@
 
-<%= render "shared/account_profile" %>
+<%= render "shared/account_profile",moji: "アカウント" %>
 
-<%= link_to edit_user_registration_path, class: "btn btn-primary" , style:"color: white;" do %>
-<i class="bi bi-pencil"></i> 編集
-<% end %>
+<div style="text-align: right;">
+  <%= link_to edit_user_registration_path, class: "btn btn-primary" , style:"color: white;" do %>
+  <i class="bi bi-pencil"></i> 編集
+  <% end %>
+</div>
 
-<h5>メールアドレス</h5>
-<%= @user.email %>
-
-<h5>パスワード</h5>
-<h5>*********</h5>
-
-<% flash.each do |key, message| %>
-  <div class="flash <%= key %>"><%= message %></div>
-<% end %>
+<table class="table account-profile-table">
+  <tr>
+      <th>メールアドレス</th>
+      <td><%= @user.email %></td>
+  </tr>
+  <tr>
+      <th>パスワード</th>
+      <td>*********</td>
+  </tr>
+</table>
 

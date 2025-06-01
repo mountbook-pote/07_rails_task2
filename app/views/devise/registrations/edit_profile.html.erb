@@ -1,11 +1,11 @@
 
-<%= render "shared/account_profile" %>
+<%= render "shared/account_profile",moji: "プロフィール" %>
 
 <%= form_for(resource, as: resource_name, url: users_update_profile_path(resource_name), html: { method: :patch }) do |f| %>
 
   <!--アイコン画像フォームを追加-->
   <div class="field">
-    <%= f.file_field :image %><br />
+    <div><%= f.file_field :image %></div>
     <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :image %></div>
   </div>
   <%= render "shared/image_attached", size: 100 %>
@@ -13,15 +13,15 @@
 
   <!--名前フォームを追加-->
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, placeholder: "ユーザー名を入力", autocomplete: "name" %>
+    <div><%= f.label :name %></div>
+    <div><%= f.text_field :name, placeholder: "ユーザー名を入力", autocomplete: "name" %></div>
     <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :name %></div>
   </div>
 
   <!--プロフィールフォームを追加-->
   <div class="field">
-    <%= f.label :profile %><br />
-    <%= f.text_area :profile, placeholder: "自己紹介を入力" %>
+    <div><%= f.label :profile %></div>
+    <div><%= f.text_area :profile, placeholder: "自己紹介を入力" %></div>
     <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :profile %></div>
   </div>
 

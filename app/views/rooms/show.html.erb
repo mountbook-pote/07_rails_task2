@@ -1,0 +1,29 @@
+<h2>作成した施設の詳細/予約</h2>
+
+<h5><%= link_to "← 戻る", :back %></h5>
+<div>
+  <% if current_user == @room.user %>
+      <%= link_to "編集", [:edit, @room] %>
+  <% end %>
+</div>
+
+<%= render "shared/room_image_attached", size: 300, obj: @room %>
+
+<table class="table">
+  <tr>
+    <th>施設名</th>
+    <td><%= @room.name %></td>
+  </tr>
+  <tr>
+    <th>料金</th>
+    <td><%= @room.price %></td>
+  </tr>
+  <tr>
+    <th>紹介文</th>
+    <td><%= @room.content%></td>
+  </tr>
+  <tr>
+    <th>製作者ID</th>
+    <td><%= @room.user_id%></td>
+  </tr>
+</table>

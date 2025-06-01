@@ -1,13 +1,11 @@
 
-<%= render "shared/account_profile" %>
+<%= render "shared/account_profile",moji: "アカウント" %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
-
-
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, placeholder: "メールアドレスを入力", autocomplete: "email" %>
+    <div><%= f.label :email %></div>
+    <div><%= f.email_field :email, placeholder: "メールアドレスを入力", autocomplete: "email" %></div>
     <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :email %></div>
   </div>
   <!--このコードはメルアド変更時のリンク踏み確認で、今回は関係ないみたい？-->
@@ -17,22 +15,22 @@
 
 
   <div class="field">
-    <%= f.label :password, "変更用パスワード" %> <i>(※変更する場合のみ)</i><br />
-    <%= f.password_field :password, placeholder: "変更用パスワードを入力", autocomplete: "new-password" %>
+    <div><%= f.label :password, "変更用パスワード" %> <span>(※変更する場合のみ)</span></div>
+    <div><%= f.password_field :password, placeholder: "変更用パスワードを入力", autocomplete: "new-password" %></div>
     <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :password %></div>
   </div>
 
 
   <div class="field">
-    <%= f.label :password_confirmation, "確認用パスワード" %> <i>(※変更する場合のみ)</i><br />
-    <%= f.password_field :password_confirmation, placeholder: "確認用パスワードを入力", autocomplete: "new-password" %>
+    <div><%= f.label :password_confirmation, "確認用パスワード" %> <span>(※変更する場合のみ)</span><br />
+    <div><%= f.password_field :password_confirmation, placeholder: "確認用パスワードを入力", autocomplete: "new-password" %>
     <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :password_confirmation %></div>
   </div>
 
 
   <div class="field">
-    <%= f.label :current_password %> <br />
-    <%= f.password_field :current_password, placeholder: "現在のパスワードを入力", autocomplete: "current-password" %>
+    <div><%= f.label :current_password %></div>
+    <div><%= f.password_field :current_password, placeholder: "現在のパスワードを入力", autocomplete: "current-password" %></div>
     <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :current_password %></div>
   </div>
 

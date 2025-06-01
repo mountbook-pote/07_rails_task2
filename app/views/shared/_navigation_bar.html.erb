@@ -8,6 +8,9 @@
       </a>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
         <!-- プルダウンメニューの内容 -->
+        <li><%= link_to '施設の新規登録', new_room_path, class: 'dropdown-item' %></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><%= link_to '登録済み一覧', rooms_own_path, class: 'dropdown-item' %></li>
         <li><%= link_to 'アカウント設定', users_account_path, class: 'dropdown-item' %></li>
         <li><hr class="dropdown-divider"></li>
         <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>

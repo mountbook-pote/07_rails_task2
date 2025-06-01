@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  root 'homes#top'
+
+  #roomモデル用のルーティング
+  get 'rooms/own', as: :rooms_own
+  resources :rooms
+
+  #userモデル用のルーティング
   devise_for :users, controllers: {
   registrations: 'users/registrations'
   }
@@ -9,7 +16,6 @@ Rails.application.routes.draw do
   patch 'users/profile/update', to: 'users/registrations#update_profile', as: :users_update_profile
   end
 
-  root 'homes#top'
   get 'homes/top'
   get 'users/account' 
   get 'users/profile' 

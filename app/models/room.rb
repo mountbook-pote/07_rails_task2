@@ -1,13 +1,10 @@
-class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  has_many :rooms, dependent: :destroy
-
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-  
+class Room < ApplicationRecord
+  belongs_to :user
   validates :name, presence: true
-  validates :profile, length: { maximum: 200 }
+  validates :content, presence: true
+  validates :price, presence: true
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validates :adress, presence: true
 
   #アイコン画像用のコード
   has_one_attached :image
@@ -25,5 +22,4 @@ class User < ApplicationRecord
       errors.add(:image, '：1MB以下のファイルをアップロードしてください。')
     end
   end
-  
 end

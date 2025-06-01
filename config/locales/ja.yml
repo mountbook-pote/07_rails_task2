@@ -27,6 +27,11 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+      room:
+        name: 施設名
+        content: 施設詳細
+        price: 料金
+        adress: 住所
     models:
       user: ユーザー
   devise:

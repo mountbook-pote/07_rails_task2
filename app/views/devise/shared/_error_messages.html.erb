@@ -1,14 +1,29 @@
 <% if resource.errors.any? %>
+  <ul>
+  <!--ビューファイル側のパーシャルで「attribute: :値」を外すと、全てのエラーが表示される -->
+    <% if defined?(attribute) && attribute %>
+      <% resource.errors.full_messages_for(attribute).each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    <% else %>
+      <% resource.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
+<%
+=begin %>
+ーーーーーーーーーーーーーー
+元のコード２
     <ul>
       <% resource.errors.full_messages_for(attribute).each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>
-<% end %>
 
-<%
-=begin %>
-元のコード
+元のコード(初期)
   <div id="error_explanation" data-turbo-cache="false">
     <h2>
       <%= I18n.t("errors.messages.not_saved",

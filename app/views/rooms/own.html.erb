@@ -1,0 +1,75 @@
+<h2>作成した施設の一覧</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>料金</th>
+      <th>作成日</th>
+      <th>編集</th>
+      <th><span style="color: red;">施設の削除</span></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td><%= render "shared/room_image_attached", size: 80, obj: room %></td>
+        <td><%= link_to "#{room.name}", room %></td>      
+        <td><%= room.content %></td>
+        <td>¥<%= number_with_delimiter(room.price)%>~</td>
+        <td><%= room.created_at.strftime("%Y/%m/%d") %></td>
+        <td><%= link_to "編集", [:edit, room] %></td>
+        <td>
+        <!--削除ボタン表示コード-->
+          <button type="button" class="btn btn-link" 
+          data-bs-toggle="modal" data-bs-target="#exampleModal-<%= room.id %>">
+          削除</button>
+        </td>
+        <!--モーダル本体用のコード-->
+        <div class="modal " id="exampleModal-<%= room.id %>" tabindex="-1" aria-labelledby="exampleModalLabel-<%= room.id %>" aria-hidden="true">
+          <div class="modal-dialog ">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel-<%= room.id %>">予定を削除しますか？</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>ID<%=room.id %>：<%= room.name %>を削除してよろしいですか？<br>この操作は取り消せません</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">キャンセル</button>
+                <%= link_to "削除", room, method: :delete, class: "btn btn-danger", style:"color: white;"%>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--モーダル用のコード終わり-->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%
+=begin %>
+ボツ
+        <td><%= render "shared/room_image_attached", size: 100 %></td>    
+ボツ
+        <td>
+          <button   id="dropdownMenuA" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= image_tag "three-dot-menu.svg", alt: "3点メニューアイコン" %>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuA">
+            <div class="card card-body">
+              <ul class="list-unstyled mb-0">
+                <li><a href="#">項目1</a></li>
+                <li><a href="#">項目2</a></li>
+                <li><a href="#">項目3</a></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+<%
+=end %>
