@@ -2,11 +2,16 @@ Rails.application.routes.draw do
   get 'reservations/reservations'
   root 'homes#top'
   #reservationモデル用のルーティング
-  resources :reservations
+  resources :reservations do
+    collection do
+      post :confirm
+      patch :confirm
+    end
+  end
 
   #roomモデル用のルーティング
   get 'rooms/own', as: :rooms_own
-  resources :rooms
+  resources :rooms 
 
   #userモデル用のルーティング
   devise_for :users, controllers: {

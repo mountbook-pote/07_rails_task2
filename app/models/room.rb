@@ -4,7 +4,7 @@ class Room < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 20 }
   validates :content, presence: true, length: { maximum: 200 }
-  validates :price, presence: true, length: { maximum: 7 }
+  validates :price, presence: true
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validates :adress, presence: true, length: { maximum: 100 }
 

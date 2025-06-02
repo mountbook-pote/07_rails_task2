@@ -19,7 +19,7 @@
 </table>
 
 <h3>再予約フォーム</h3>
-<%= form_with model: @reservation do |f| %>
+<%= form_with model: @reservation, url: confirm_reservations_path do |f| %>
   <div class="row">
     <div class="col-4">
       <div><%= f.label :check_in ,"チェックイン" %></div>
@@ -37,7 +37,9 @@
       <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :number_of_people %></div>
     </div>
   </div>
-  <!--create時にroom_idは指定しているため、editではhiddenは不要となる -->
+  <%= f.hidden_field :room_id, value: @reservation.room_id %>
+  <!-- 以下、予約の更新時に必要。これを書かないとreservationのidはconfirmに渡されない。-->
+  <%= f.hidden_field :id if @reservation.persisted? %>
   <div>
     <p><%= f.submit "再予約する", class: "btn btn-primary", style:"color: white;"%></p>
   </div>

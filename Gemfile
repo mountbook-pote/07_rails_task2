@@ -71,3 +71,5 @@ gem 'rails-i18n' #railsのよく使われる翻訳一式とのこと
 gem 'devise-i18n' #deviseのよく使われる翻訳一式とのこと
 
 gem "image_processing", "~> 1.2" #画像処理を行うためのgem
+
+gem 'ransack' #検索機能をつけられる

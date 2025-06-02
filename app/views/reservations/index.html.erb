@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>画像</th>
-      <th>施設名</th> <!-- 後でリンク先行けるよう修正-->
+      <th>施設名</th> 
       <th>紹介文</th>
       <th>合計料金</th> <!-- 後で修正-->
       <th>チェックイン</th>
@@ -21,7 +21,7 @@
         <td><%= render "shared/room_image_attached", size: 80, obj: reservation.room %></td>
         <td><%= link_to "#{reservation.room.name}", reservation.room %></td>
         <td><%= reservation.room.content %></td>
-        <td>¥<%= number_with_delimiter(reservation.room.price)%>~</td>
+        <td>¥<%= number_with_delimiter(reservation.room.price * reservation.number_of_people)%></td>
         <td><%= reservation.check_in.strftime("%Y/%m/%d") %></td>
         <td><%= reservation.check_out.strftime("%Y/%m/%d") %></td>
         <td><%= reservation.updated_at.strftime("%Y/%m/%d %H:%M") %></td>

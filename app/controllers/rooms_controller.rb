@@ -3,6 +3,14 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
 
+
+  def index
+    # params[:q]のqには検索フォームに入力した値が入る
+    @q = Room.ransack(params[:q])
+    # distinct: trueは重複したデータを除外
+    @rooms = @q.result(distinct: true)
+  end
+
   def own
     @rooms = current_user.rooms
   end

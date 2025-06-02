@@ -18,7 +18,7 @@ class ReservationsController < ApplicationController
       redirect_to :reservations, notice: "施設の予約が完了しました"
     else
       #room_idもparamsに渡す
-      @room = Room.find_by(params[:reservation][:room_id]) 
+      @room = Room.find_by(id: params[:reservation][:room_id]) 
       @user = current_user
       flash.now[:alert] = "施設の予約に失敗しました"
       render "rooms/show"
@@ -26,6 +26,30 @@ class ReservationsController < ApplicationController
   end
 
   def confirm
+    if params[:reservation][:id].present?
+      #①再予約の処理
+      @reservation = current_user.reservations.find(params[:reservation][:id])
+      @reservation.assign_attributes(params.require(:reservation).permit(:check_in, :check_out, :number_of_people, :room_id))
+    else
+      #②新規予約の処理
+      @reservation = current_user.reservations.build(params.require(:reservation).permit(:check_in, :check_out, :number_of_people, :room_id))
+    end
+    
+    if @reservation.valid?
+      #上で①の場合なら、再予約用フォームになる
+      #②の場合は、新規予約用フォームになる。
+      render :confirm
+    else
+      if params[:reservation][:id].present?
+        flash.now[:alert] = "予約情報が不足しています。"
+        render "edit"
+      else
+        @room = Room.find_by(id: params[:reservation][:room_id]) 
+        @user = current_user
+        flash.now[:alert] = "予約情報が不足しています。"
+        render "rooms/show"
+      end
+    end
   end
 
   def edit
@@ -57,7 +81,7 @@ class ReservationsController < ApplicationController
 
   def authorize_user!
     unless @reservation.user == current_user
-      redirect_to :rooms_own, alert: "権限がありません。"
+      redirect_to :reservations, alert: "権限がありません。"
     end
   end
 end

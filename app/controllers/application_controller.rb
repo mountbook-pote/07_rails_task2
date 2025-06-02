@@ -1,4 +1,10 @@
 class ApplicationController < ActionController::Base
+before_action :set_search
+
+def set_search
+  #application_controllerで書くことで、どのビューからでも検索フォームを出せる
+  @q = Room.ransack(params[:q])
+end
 end
 
 =begin

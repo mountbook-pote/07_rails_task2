@@ -1,0 +1,7 @@
+<div>
+  <%= search_form_for @q do |f| %>
+    <!--name_contは、あいまい検索を指定-->
+    <%= f.text_field :name_cont, placeholder: "エリア名を入力" %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>

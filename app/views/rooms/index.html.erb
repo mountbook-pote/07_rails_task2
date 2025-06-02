@@ -1,0 +1,13 @@
+<%= render "shared/search_form" %>
+
+<!--検索結果-->
+<% if @rooms.present? %>
+  <!--検索がヒットした場合-->
+  <% @rooms.each do |room| %>
+    <%= room.id %>
+    <%= room.name %>
+  <% end %>
+<% else %>
+  <!--検索がヒットしなかった場合-->
+  <p>検索結果はありません</p>
+<% end %>
