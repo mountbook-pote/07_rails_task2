@@ -18,12 +18,12 @@
     <td>¥<%= number_with_delimiter(@room.price)%>~</td>
   </tr>
   <tr>
-    <th>紹介文</th>
-    <td><%= @room.content%></td>
+    <th>住所</th>
+    <td><%= @room.adress%></td>
   </tr>
   <tr>
-    <th>製作者ID</th>
-    <td><%= @room.user_id%></td>
+    <th>紹介文</th>
+    <td><%= @room.content%></td>
   </tr>
 </table>
 
@@ -48,7 +48,11 @@
   </div>
   <!-- current_userでuser_idは渡されるがroom_idはhidden必須。また、予約失敗時に、予約しようとしている施設のページに戻るためにも必要となるとのこと-->
   <%= f.hidden_field :room_id, value: @room.id %>
-  <div>
-    <p><%= f.submit "予約する", class: "btn btn-primary", style:"color: white;"%></p>
-  </div>
+  <% if user_signed_in? %>
+    <div>
+      <p><%= f.submit "予約する", class: "btn btn-primary", style:"color: white;"%></p>
+    </div>
+  <% else %>
+      <div><%= link_to "ログイン", new_user_session_path, class: "btn btn-light", style:"color: black;" %></div>
+  <% end %>
 <% end %>

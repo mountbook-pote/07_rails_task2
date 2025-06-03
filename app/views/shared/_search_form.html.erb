@@ -1,7 +1,26 @@
-<div>
-  <%= search_form_for @q do |f| %>
-    <!--name_contは、あいまい検索を指定-->
-    <%= f.text_field :name_cont, placeholder: "エリア名を入力" %>
-    <%= f.submit "検索" %>
-  <% end %>
-</div>
+<!--application_controllerに@q = Room.searchメソッドを渡しているため、どのページでも使える-->
+
+<% if current_page?(root_path) %>
+  <div>
+    <h5>施設を検索できます</h5>
+    <%= search_form_for @q do |f| %>
+      <!--*_contは、あいまい検索を指定-->
+      <%= f.text_field :adress_cont, placeholder: "エリア名を入力" %>
+      <%= f.submit "検索" %>
+    <% end %>
+    <br>
+    <h5>おすすめのエリア</h5>
+    <%= link_to "東京", rooms_path(q: { adress_cont: "東京" }) %>
+    <%= link_to "大阪", rooms_path(q: { adress_cont: "大阪" }) %>
+    <%= link_to "京都", rooms_path(q: { adress_cont: "京都" }) %>
+    <%= link_to "札幌", rooms_path(q: { adress_cont: "札幌" }) %>        
+  </div>
+<% else %>
+  <div>
+    <%= search_form_for @q do |f| %>
+      <%= f.text_field :adress_cont, placeholder: "エリア名を入力" %>
+      <%= f.text_field :name_or_content_cont, placeholder: "キーワード名を入力" %>
+      <%= f.submit "検索" %>
+    <% end %>
+  </div>
+<% end %>

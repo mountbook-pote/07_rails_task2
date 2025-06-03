@@ -1,13 +1,31 @@
 <%= render "shared/search_form" %>
 
-<!--検索結果-->
 <% if @rooms.present? %>
-  <!--検索がヒットした場合-->
-  <% @rooms.each do |room| %>
-    <%= room.id %>
-    <%= room.name %>
-  <% end %>
+  <p><%= @rooms.size%>件が見つかりました。</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>画像</th>          
+          <th>施設名</th>
+          <th>住所</th>
+          <th>紹介文</th>
+          <th>料金</th>
+          <th>詳細</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% @rooms.each do |room| %>
+          <tr>
+            <td><%= render "shared/room_image_attached", size: 80, obj: room %></td>
+            <td><%= room.name %></td>
+            <td><%= room.adress %></td>
+            <td><%= room.content %></td>
+            <td>¥<%= number_with_delimiter(room.price)%>~</td>
+            <td><%= link_to "詳細", room %></td>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
 <% else %>
-  <!--検索がヒットしなかった場合-->
   <p>検索結果はありません</p>
 <% end %>
