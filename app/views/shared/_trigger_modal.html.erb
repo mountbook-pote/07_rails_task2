@@ -1,0 +1,5 @@
+<!--引数、obj1:roomかreservationが入る。obj2:"施設"か"予約"が入る -->
+
+<%= link_to "#{obj2}の削除", "#exampleModal-#{obj1.id}", 
+class: "btn-link displaymodal", style: "color: red;" ,
+data: { bs_toggle: "modal", bs_target: "#exampleModal-#{obj1.id}" } %>

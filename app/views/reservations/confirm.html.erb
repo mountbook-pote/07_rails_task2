@@ -1,62 +1,60 @@
-<h2>予約内容の確認</h2>
-
-<table class="table">
-  <tr>
-    <th>ホテル名</th>
-    <td><%= @reservation.room.name %></td>
-  </tr>
-  <tr>
-    <th>チェックイン</th>
-    <td><%= @reservation.check_in.strftime("%Y/%m/%d") %></td>
-  </tr>
-  <tr>
-    <th>チェックアウト</th>
-    <td><%= @reservation.check_out.strftime("%Y/%m/%d") %></td>
-  </tr>
-  <tr>
-    <th>日数</th>
-    <td><%= (@reservation.check_out - @reservation.check_in).to_i %>日</td>
-  </tr>
-  <tr>
-    <th>人数</th>
-    <td><%= @reservation.number_of_people %></td>
-  </tr>
-  <tr>
-    <th>お支払い金額</th>
-    <td>¥<%= number_with_delimiter(@reservation.room.price * @reservation.number_of_people)%></td>
-  </tr>
-  <tr>
-    <th>予約する人</th>
-    <td><%= @reservation.user.name%></td>
-  </tr>
-</table>
-
-<h5>上記内容でよろしければ「確定」ボタンを押してください。</h5>
-
-<!-- 予約が保存済みかどうかを判定する -->
-<% if @reservation.persisted? %>
-  <!-- 保存済の場合(patchを実行) -->
-  <%= form_with model: @reservation, url: reservation_path(@reservation), method: :patch do |f| %>
-    <%= f.hidden_field :check_in %>
-    <%= f.hidden_field :check_out %>
-    <%= f.hidden_field :number_of_people %>
-    <%= f.hidden_field :room_id %>
-    <div>
-      <p><%= f.submit "再予約を確定", class: "btn btn-primary", style:"color: white;"%></p>
-      <p><%= link_to "キャンセル", :back %></p>
-    </div>
+<div class="container">
+  <h2>予約内容の確認</h2>
+  
+  <table class="table">
+    <tr>
+      <th>ホテル名</th>
+      <td><%= @reservation.room.name %></td>
+    </tr>
+    <tr>
+      <th>チェックイン</th>
+      <td><%= @reservation.check_in.strftime("%Y/%m/%d") %></td>
+    </tr>
+    <tr>
+      <th>チェックアウト</th>
+      <td><%= @reservation.check_out.strftime("%Y/%m/%d") %></td>
+    </tr>
+    <tr>
+      <th>日数</th>
+      <td><%= (@reservation.check_out - @reservation.check_in).to_i %>日</td>
+    </tr>
+    <tr>
+      <th>人数</th>
+      <td><%= @reservation.number_of_people %></td>
+    </tr>
+    <tr>
+      <th>お支払い金額</th>
+      <td>¥<%= number_with_delimiter(@reservation.room.price * @reservation.number_of_people)%></td>
+    </tr>
+  </table>
+  
+  <p>上記内容でよろしければ「確定」ボタンを押してください。<p>
+  
+  <!-- 予約が保存済みかどうかを判定する -->
+  <% if @reservation.persisted? %>
+    <!-- 保存済の場合(form_with method: :patchを実行) -->
+    <%= form_with model: @reservation, url: reservation_path(@reservation), method: :patch do |f| %>
+      <%= f.hidden_field :check_in %>
+      <%= f.hidden_field :check_out %>
+      <%= f.hidden_field :number_of_people %>
+      <%= f.hidden_field :room_id %>
+      <div>
+        <p><%= f.submit "再予約を確定", class: "btn btn-save w-100 by-2" %></p>
+        <p><%= link_to "キャンセル", :back, class: "btn btn-outline-secondary w-100 by-2" %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <!-- 新規作成の場合(form_with method: :createを実行) -->
+    <%= form_with model: @reservation do |f| %>
+      <!-- hiddenで値を保持して送信する -->
+      <%= f.hidden_field :check_in %>
+      <%= f.hidden_field :check_out %>
+      <%= f.hidden_field :number_of_people %>
+      <%= f.hidden_field :room_id %>
+      <div>
+        <p><%= f.submit "予約を確定", class: "btn btn-save w-100 by-2" %></p>
+        <p><%= link_to "キャンセル", :back, class: "btn btn-outline-secondary w-100 by-2" %></p>
+      </div>
+    <% end %>
   <% end %>
-<% else %>
-  <!-- 新規作成の場合(createを実行) -->
-  <%= form_with model: @reservation do |f| %>
-    <!-- hiddenで値を保持して送信する -->
-    <%= f.hidden_field :check_in %>
-    <%= f.hidden_field :check_out %>
-    <%= f.hidden_field :number_of_people %>
-    <%= f.hidden_field :room_id %>
-    <div>
-      <p><%= f.submit "予約を確定", class: "btn btn-primary", style:"color: white;"%></p>
-      <p><%= link_to "キャンセル", :back %></p>
-    </div>
-  <% end %>
-<% end %>
+</div>

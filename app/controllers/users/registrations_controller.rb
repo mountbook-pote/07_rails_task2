@@ -19,16 +19,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :profile, :image])
   end
-
-
-
-
 
   # GET /resource/sign_up
   # def new

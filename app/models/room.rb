@@ -13,6 +13,7 @@ class Room < ApplicationRecord
   validate :image_content_type
   validate :image_size
 
+  private #課題仕様作成後にprivateつけた。不要なら外す
   def image_content_type
     if image.attached? && !image.content_type.in?(%w[image/jpeg image/png image/gif])
       errors.add(:image, '：ファイル形式が、JPEG, PNG, GIF以外になってます。ファイル形式をご確認ください。')

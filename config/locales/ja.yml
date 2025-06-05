@@ -28,6 +28,7 @@ ja:
         unlock_token: ロック解除用トークン
         updated_at: 更新日
       room:
+        #追加したモデルのカラムに日本語名を当てる
         name: 施設名
         content: 施設詳細
         price: 料金

@@ -12,6 +12,7 @@ class RoomsController < ApplicationController
   end
 
   def own
+    #検索結果＝indexで表示し、自身の作成した施設はownで表示させている。
     @rooms = current_user.rooms
   end
 
@@ -30,7 +31,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @reservation = Reservation.new #ホテルの詳細画面を開くと予約の投稿枠ができる
+    @reservation = Reservation.new #ホテルの詳細画面を開くと予約の投稿枠ができる。
   end
 
   def edit
@@ -41,7 +42,7 @@ class RoomsController < ApplicationController
       redirect_to :rooms_own, notice: "施設情報を更新しました"
     else
       flash.now[:alert] = "施設情報の更新に失敗しました"
-      render "new"
+      render "edit"
     end
   end
 

@@ -1,8 +1,7 @@
 <% width = local_assigns[:size] || 40 %>
-<% width = local_assigns[:size] || 40 %>
 
 <% if obj.image.attached? %>
-  <%= image_tag obj.image.variant(resize_to_limit: [width, width]), class:"" %>
+  <%= image_tag obj.image.variant(resize_to_limit: [width, width]) %>
 <% else %>
-  <%= image_tag "default-image-hotel.png", class: "", size: "#{width}x#{width}" %>
+  <%= image_tag "default-image-hotel.png", size: "#{width}x#{width}" %>
 <% end %>

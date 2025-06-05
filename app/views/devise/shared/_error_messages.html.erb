@@ -1,6 +1,7 @@
 <% if resource.errors.any? %>
   <ul>
   <!--ビューファイル側のパーシャルで「attribute: :値」を消すと、全てのエラーが表示される -->
+  <!--リレーション関係にあるモデルのidがない時とかが、上を消すと表示される。 -->
     <% if defined?(attribute) && attribute %>
       <% resource.errors.full_messages_for(attribute).each do |message| %>
         <li><%= message %></li>
@@ -15,7 +16,7 @@
 
 <%
 =begin %>
-ーーーーーーーーーーーーーー
+使ってないーーーーーーーーーーーーーー
 元のコード２
     <ul>
       <% resource.errors.full_messages_for(attribute).each do |message| %>
@@ -23,7 +24,7 @@
       <% end %>
     </ul>
 
-元のコード(初期)
+元のコード(devise導入時)
   <div id="error_explanation" data-turbo-cache="false">
     <h2>
       <%= I18n.t("errors.messages.not_saved",

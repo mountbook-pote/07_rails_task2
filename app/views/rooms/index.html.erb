@@ -1,6 +1,7 @@
 <%= render "shared/search_form" %>
 
 <% if @rooms.present? %>
+  <h3>検索結果</h3>
   <p><%= @rooms.size%>件が見つかりました。</p>
     <table class="table">
       <thead>
@@ -14,6 +15,7 @@
         </tr>
       </thead>
       <tbody>
+          <!--検索結果「だけ」を繰り返し表示させるため、tbody内に書く -->
           <% @rooms.each do |room| %>
           <tr>
             <td><%= render "shared/room_image_attached", size: 80, obj: room %></td>
@@ -21,7 +23,7 @@
             <td><%= room.adress %></td>
             <td><%= room.content %></td>
             <td>¥<%= number_with_delimiter(room.price)%>~</td>
-            <td><%= link_to "詳細", room %></td>
+            <td><%= link_to "詳細", room, class: "linkto_normal" %></td>
           </tr>
           <% end %>
       </tbody>

@@ -1,46 +1,42 @@
-<h2>再予約する</h2>
-
-<!-- 施設画像を表示する-->
-<%= render "shared/room_image_attached", size: 300, obj: @reservation.room %>
-
-<table class="table">
-  <tr>
-    <th>施設名</th>
-    <td><%= @reservation.room.name %></td>
-  </tr>
-  <tr>
-    <th>料金</th>
-    <td>¥<%= number_with_delimiter(@reservation.room.price)%>~</td>
-  </tr>
-  <tr>
-    <th>紹介文</th>
-    <td><%= @reservation.room.content%></td>
-  </tr>
-</table>
-
-<h3>再予約フォーム</h3>
-<%= form_with model: @reservation, url: confirm_reservations_path do |f| %>
-  <div class="row">
-    <div class="col-4">
-      <div><%= f.label :check_in ,"チェックイン" %></div>
-      <div><%= f.date_field :check_in, class:"calender-area" %></div>
-      <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :check_in %></div>
-    </div>
-    <div class="col-4 ">
-      <div><%= f.label :check_out ,"チェックアウト" %></div>
-      <div><%= f.date_field :check_out, class:"calender-area" %></div>
-      <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :check_out %></div>
-    </div>
-    <div class="col-4 ">
-      <div><%= f.label :number_of_people, "人数" %></div>
-      <div><%= f.text_field :number_of_people, placeholder: "人数を入力" %></div>
-      <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :number_of_people %></div>
-    </div>
+<div class="container">
+  <h2>再予約する</h2>
+  
+  <!-- 施設画像を表示する-->
+  <%= render "shared/room_wide_image_attached", obj: @reservation.room %>
+  
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3><%= @reservation.room.name %></h3>
+    <h3>¥<%= number_with_delimiter(@reservation.room.price)%>~</h3>
   </div>
-  <%= f.hidden_field :room_id, value: @reservation.room_id %>
-  <!-- 以下、予約の更新時に必要。これを書かないとreservationのidはconfirmに渡されない。-->
-  <%= f.hidden_field :id if @reservation.persisted? %>
-  <div>
-    <p><%= f.submit "再予約する", class: "btn btn-primary", style:"color: white;"%></p>
-  </div>
-<% end %>
+  <div class="mb-3"><%= @reservation.room.adress%></div>
+  <p><%= @reservation.room.content%></p>
+  
+  <h3>再予約フォーム</h3>
+  <%= form_with model: @reservation, url: confirm_reservations_path do |f| %>
+    <div class="row mb-3">
+      <div class="col-4">
+        <div><%= f.label :check_in ,"チェックイン" %></div>
+        <div><%= f.date_field :check_in, class:"calender-area w-100" %></div>
+        <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :check_in %></div>
+      </div>
+      <div class="col-4 ">
+        <div><%= f.label :check_out ,"チェックアウト" %></div>
+        <div><%= f.date_field :check_out, class:"calender-area w-100" %></div>
+        <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :check_out %></div>
+      </div>
+      <div class="col-4 ">
+        <div><%= f.label :number_of_people, "人数" %></div>
+        <div><%= f.text_field :number_of_people, placeholder: "人数を入力", class:"w-100" %></div>
+        <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :number_of_people %></div>
+      </div>
+    </div>
+
+    <%= f.hidden_field :room_id, value: @reservation.room_id %>
+    <!-- 以下、予約の「更新時」に必要。これを書かないとreservationのidはconfirmに渡されない。-->
+    <%= f.hidden_field :id if @reservation.persisted? %>
+
+    <div>
+      <p><%= f.submit "再予約する", class: "btn btn-save w-100 py-2 mb-3" %></p>
+    </div>
+  <% end %>
+</div>

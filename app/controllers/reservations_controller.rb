@@ -12,14 +12,14 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    #@reservationにはroom_id(hidden扱い)もpermitで渡す(エラーが出る)
+    #@reservationにはroom_id(hidden扱い)もpermitで渡す(渡さないとエラーが出る)
     @reservation = current_user.reservations.build(params.require(:reservation).permit(:check_in, :check_out, :number_of_people, :room_id))
     if @reservation.save
       redirect_to :reservations, notice: "施設の予約が完了しました"
     else
-      #room_idもparamsに渡す
+      #開いていた施設のページに戻るため、room_idもparamsに渡す
       @room = Room.find_by(id: params[:reservation][:room_id]) 
-      @user = current_user
+      @user = current_user #←なくてもいける？
       flash.now[:alert] = "施設の予約に失敗しました"
       render "rooms/show"
     end
@@ -27,11 +27,11 @@ class ReservationsController < ApplicationController
 
   def confirm
     if params[:reservation][:id].present?
-      #①再予約の処理
+      #①再予約の処理(既に予約が存在する場合)
       @reservation = current_user.reservations.find(params[:reservation][:id])
       @reservation.assign_attributes(params.require(:reservation).permit(:check_in, :check_out, :number_of_people, :room_id))
     else
-      #②新規予約の処理
+      #②新規予約の処理(その予約が存在しない場合)
       @reservation = current_user.reservations.build(params.require(:reservation).permit(:check_in, :check_out, :number_of_people, :room_id))
     end
     
@@ -42,12 +42,12 @@ class ReservationsController < ApplicationController
     else
       if params[:reservation][:id].present?
         flash.now[:alert] = "予約情報が不足しています。"
-        render "edit"
+        render "edit" #その予約の編集画面に戻る
       else
         @room = Room.find_by(id: params[:reservation][:room_id]) 
         @user = current_user
         flash.now[:alert] = "予約情報が不足しています。"
-        render "rooms/show"
+        render "rooms/show" #そのページの画面に戻る
       end
     end
   end

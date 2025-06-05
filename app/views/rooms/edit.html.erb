@@ -1,40 +1,53 @@
-<h2>施設情報の編集</h2>
-
-<%= form_with model: @room do |f| %>
-  <div class="field">
-    <div><%= f.label :name, "施設名<span style='color: red;'>*</span>".html_safe %></div>
-    <div><%= f.text_field :name, placeholder: "施設名を入力",autofocus: true, autocomplete: "name" %></div>
-    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @room, attribute: :name %></div>
-  </div>
-
-  <div class="field">
-    <div><%= f.label :content, "施設詳細<span style='color: red;'>*</span>".html_safe %></div>
-    <div><%= f.text_area :content, placeholder: "施設詳細を入力", autocomplete: "content" %></div>
-    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @room, attribute: :content %></div>
-  </div>
+<div class= "container">
+  <h2>施設情報の編集</h2>
   
-  <div class="field">
-    <div><%= f.label :price, "料金<span style='color: red;'>*</span>".html_safe %></div>
-    <div><%= f.text_field :price, placeholder: "１日あたりの料金を入力", autocomplete: "price" %></div>
-    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @room, attribute: :price %></div>
-  </div>
-
-  <div class="field">
-    <div><%= f.label :adress, "住所<span style='color: red;'>*</span>".html_safe %></div>
-    <div><%= f.text_field :adress, placeholder: "住所を入力", autocomplete: "adress" %></div>
-    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @room, attribute: :adress %></div>
-  </div>
-
-  <!--画像フォームを追加-->
-  <div class="field">
-    <div><%= f.label :image, "施設画像".html_safe %></div>
-    <div><%= f.file_field :image %></div>
-    <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @room, attribute: :image %></div>
-  </div>
-  <%= render "shared/room_image_attached", size: 150, obj: f.object %>
-
-  <div class="cancelsave-buttons">
-      <p><%= f.submit "保存", class: "btn btn-primary", style:"color: white;"%></p>
-      <p><%= link_to "キャンセル", :back %></p>
-  </div>
-<% end %>
+  <%= form_with model: @room do |f| %>
+    <div class="field row mb-3">
+        <div class= "col-md-4"><%= f.label :name, "施設名<span style='color: red;'>*</span>".html_safe %></div>
+        <div class= "col-md-8">
+          <div><%= f.text_field :name, placeholder: "施設名を入力",autofocus: true, autocomplete: "name", class: "w-100"  %></div>
+          <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @room, attribute: :name %></div>
+        </div>
+      </div>
+  
+      <div class="field row mb-3">
+        <div class="col-md-4"><%= f.label :content, "施設詳細<span style='color: red;'>*</span>".html_safe %></div>
+        <div class="col-md-8">
+          <div><%= f.text_area :content, placeholder: "施設詳細を入力", autocomplete: "content", class: "w-100"  %></div>
+          <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @room, attribute: :content %></div>
+        </div>
+      </div>
+  
+      <div class="field row mb-3">
+        <div class="col-md-4"><%= f.label :price, "料金<span style='color: red;'>*</span>".html_safe %></div>
+        <div class="col-md-8">
+          <div><%= f.text_field :price, placeholder: "１日あたりの料金を入力", autocomplete: "price", class: "w-100"  %></div>
+          <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @room, attribute: :price %></div>
+        </div>
+      </div>
+  
+      <div class="field row mb-3">
+        <div class="col-md-4"><%= f.label :adress, "住所<span style='color: red;'>*</span>".html_safe %></div>
+        <div class="col-md-8">
+          <div><%= f.text_field :adress, placeholder: "住所を入力", autocomplete: "adress", class: "w-100" %></div>
+          <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @room, attribute: :adress %></div>
+        </div>
+      </div>
+  
+      <!--画像フォームを追加-->
+      <div class="field row mb-3">
+        <div class="col-md-4"><%= f.label :image, "施設画像".html_safe %></div>
+        <div class="col-md-8">
+          <div><%= f.file_field :image %></div>
+          <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @room, attribute: :image %></div>
+        </div>
+      </div>
+  
+    <!--roomsCのbefore_actionより、current_userが行うため、user_idのhiddenは不要 -->
+  
+      <div class="cancelsave-buttons">
+          <p><%= f.submit "保存", class: "btn btn-save w-100" %></p>
+          <p><%= link_to "キャンセル", :back, class: "btn btn-outline-secondary w-100" %></p>
+      </div>
+  <% end %>
+</div>

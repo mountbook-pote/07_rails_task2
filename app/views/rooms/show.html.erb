@@ -1,58 +1,53 @@
-<h5><%= link_to "← 戻る", :back %></h5>
-<div>
+<div class="container">  
   <% if current_user == @room.user %>
-      <%= link_to "編集", [:edit, @room] %>
-  <% end %>
-</div>
-
-<!-- 施設画像を表示する-->
-<%= render "shared/room_image_attached", size: 300, obj: @room %>
-
-<table class="table">
-  <tr>
-    <th>施設名</th>
-    <td><%= @room.name %></td>
-  </tr>
-  <tr>
-    <th>料金</th>
-    <td>¥<%= number_with_delimiter(@room.price)%>~</td>
-  </tr>
-  <tr>
-    <th>住所</th>
-    <td><%= @room.adress%></td>
-  </tr>
-  <tr>
-    <th>紹介文</th>
-    <td><%= @room.content%></td>
-  </tr>
-</table>
-
-<h3>予約フォーム</h3>
-<%= form_with model: @reservation, url: confirm_reservations_path do |f| %>
-  <div class="row">
-    <div class="col-4">
-      <div><%= f.label :check_in ,"チェックイン" %></div>
-      <div><%= f.date_field :check_in, class:"calender-area" %></div>
-      <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :check_in %></div>
-    </div>
-    <div class="col-4 ">
-      <div><%= f.label :check_out ,"チェックアウト" %></div>
-      <div><%= f.date_field :check_out, class:"calender-area" %></div>
-      <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :check_out %></div>
-    </div>
-    <div class="col-4 ">
-      <div><%= f.label :number_of_people, "人数" %></div>
-      <div><%= f.text_field :number_of_people, placeholder: "人数を入力" %></div>
-      <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :number_of_people %></div>
-    </div>
-  </div>
-  <!-- current_userでuser_idは渡されるがroom_idはhidden必須。また、予約失敗時に、予約しようとしている施設のページに戻るためにも必要となるとのこと-->
-  <%= f.hidden_field :room_id, value: @room.id %>
-  <% if user_signed_in? %>
-    <div>
-      <p><%= f.submit "予約する", class: "btn btn-primary", style:"color: white;"%></p>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5><%= link_to "← 戻る", :back, class: "linkto_normal" %></h5>
+      <!-- 現在のユーザ＝施設作成ユーザの時、以下の編集ボタンを表示-->
+      <%= link_to [:edit, @room], class: "btn btn-primary" , style:"color: white;" do %>
+        <i class="bi bi-pencil"></i> 編集
+      <% end %>
     </div>
   <% else %>
-      <div><%= link_to "ログイン", new_user_session_path, class: "btn btn-light", style:"color: black;" %></div>
+    <h5 class="mb-3"><%= link_to "← 戻る", :back, class: "linkto_normal" %></h5>
   <% end %>
-<% end %>
+
+  <!-- 施設画像を表示する-->
+  <%= render "shared/room_wide_image_attached", obj: @room %>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3><%= @room.name %></h3>
+    <h3>¥<%= number_with_delimiter(@room.price)%>~</h3>
+  </div>
+  <div class="mb-3"><%= @room.adress%></div>
+  <p><%= @room.content%></p>
+
+  <h3>予約フォーム</h3>
+  <%= form_with model: @reservation, url: confirm_reservations_path do |f| %>
+    <div class="row mb-3">
+      <div class="col-4">
+        <div><%= f.label :check_in ,"チェックイン" %></div>
+        <div><%= f.date_field :check_in, class:"calender-area w-100" %></div>
+        <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :check_in %></div>
+      </div>
+      <div class="col-4 ">
+        <div><%= f.label :check_out ,"チェックアウト" %></div>
+        <div><%= f.date_field :check_out, class:"calender-area w-100" %></div>
+        <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :check_out %></div>
+      </div>
+      <div class="col-4 ">
+        <div><%= f.label :number_of_people, "人数" %></div>
+        <div><%= f.text_field :number_of_people, placeholder: "人数を入力", class:"w-100" %></div>
+        <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @reservation, attribute: :number_of_people %></div>
+      </div>
+    </div>
+    <!-- current_userでuser_idは渡されるがroom_idはhidden必須。また、予約失敗時に、予約しようとしている施設のページに戻るためにも必要となるとのこと-->
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <% if user_signed_in? %>
+      <div>
+        <p><%= f.submit "予約する", class: "btn btn-save w-100 py-2 mb-3" %></p>
+      </div>
+    <% else %>
+        <div><%= link_to "ログイン", new_user_session_path, class: "btn btn-light w-100 py-2 mb-3", style:"color: black;" %></div>
+    <% end %>
+  <% end %>
+</div>

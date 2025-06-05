@@ -1,12 +1,10 @@
-<h1>設定</h1>
+<% button_class = "btn btn-outline-primary button_noneaction_primary w-75 py-2" %>
 
-<div class="account-profile-links">
-  <div>
-    <%= link_to 'アカウント', users_account_path %>
+  <div class="row text-center g-3" >
+    <div class="col-6 col-lg-12">
+      <%= link_to 'アカウント', users_account_path, class: button_class %>
+    </div>
+    <div class="col-6 col-lg-12">
+      <%= link_to 'プロフィール', users_profile_path, class: button_class %>
+    </div>
   </div>
-  <div>
-    <%= link_to 'プロフィール', users_profile_path %>
-  </div>
-</div>
-
-<h3 class= "account-profile-string"><%= moji %></h3>
