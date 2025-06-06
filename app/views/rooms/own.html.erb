@@ -1,0 +1,44 @@
+<h2>作成した施設の一覧</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>料金</th>
+      <th>作成日</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td><%= render "shared/room_image_attached", size: 80, obj: room %></td>
+        <td><%= link_to "#{room.name}", room, class: "linkto_normal" %></td>      
+        <td><%= room.content %></td>
+        <td>¥<%= number_with_delimiter(room.price)%>~</td>
+        <td><%= room.created_at.strftime("%Y/%m/%d") %></td>
+        <td>
+          <div class="dropdown">
+            <button type="button" class="btn btn-secondary threedot-button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            &#x22EE;
+            </button>
+              <ul class="dropdown-menu">
+                <li><%= link_to "編集", [:edit, room], class: "btn-link displaymodal dropdown-item" %></li>
+                <li>
+                  <!-- link_to "削除"に使用するモーダル起動パーシャル-->
+                  <%= render "shared/trigger_modal", class: "dropdown-item", obj1: room, obj2: "施設" %>
+                </li>
+              </ul>
+          </div>
+        </td>
+      </tr>
+    <!-- 上記のモーダル用パーシャル。tdやli内にモーダルを置くとDOMに正しく配置されず不具合起こすことがあるそう-->  
+    <%= render "shared/display_modal", obj1: room, obj2: "施設" %>
+    <% end %>
+  </tbody>
+</table>
+
+

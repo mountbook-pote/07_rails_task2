@@ -1,0 +1,38 @@
+<h1>設定</h1>
+
+<div class="row align-items-center" >
+  <div class="col-lg-4">
+    <%= render "shared/account_profile" %>
+  </div>
+  <div class="col-lg-8">
+    <%= form_for(resource, as: resource_name, url: users_update_profile_path(resource_name), html: { method: :patch }) do |f| %>
+      <h3 class="mt-3">プロフィール</h3>
+      <div class="field row py-2 align-items-center border-bottom">
+        <div class= "col-sm-3 fw-bold text-nowrap mb-2"><%= f.label "アイコン画像" %></div>
+        <div class= "col-sm-2"><%= render "shared/image_attached", size: 100 %></div>        
+        <div class= "col-sm-7"><%= f.file_field :image %></div>
+      </div>
+      <div class="field row py-2 border-bottom w-100">
+        <div class= "col-sm-3 fw-bold text-nowrap mb-2"><%= f.label :name %></div>
+        <div class= "col-sm-9">
+          <div><%= f.text_field :name, placeholder: "ユーザー名を入力", autocomplete: "name", class: "w-100" %></div>
+          <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :name %></div>
+        </div> 
+      </div>
+      <div class="field row py-2 border-bottom w-100">
+        <div class= "col-sm-3 fw-bold text-nowrap mb-2"><div><%= f.label :profile %></div></div>
+        <div class= "col-sm-9">
+          <div><%= f.text_area :profile, placeholder: "自己紹介を入力", class: "w-100" %></div>
+          <div class="new-edit-error"><%= render "devise/shared/error_messages", resource: @user, attribute: :profile %></div>
+        </div>
+      </div>
+      <div class="actions row py-2 w-100">
+        <div class="col-md-6 py-2 "><%= f.submit "保存", class: "btn btn-save w-100" %></div>
+        <div class="col-md-6 py-2 "><%= link_to "キャンセル", :back, class: "btn btn-outline-secondary w-100 " %></div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+

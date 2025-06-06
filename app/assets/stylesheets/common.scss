@@ -1,0 +1,110 @@
+/*共通要素*/
+*{
+    box-sizing: border-box; 
+    /*border: 1px solid black;*/
+}  
+
+/*header要素*/
+header{
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.header_contents{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toppage_link{
+  color: white;
+  text-decoration: none;
+  font-size: 170%;
+}
+
+.toppage_link:hover{
+  color: white;
+}
+
+.login_and_signup_buttons{
+  display: flex;
+  gap: 10px;
+}
+
+/*body要素*/
+body{
+    height: 100%;
+    width: 100%; 
+    margin: 0;
+    font-family: sans-serif;
+    background-color: rgba(245, 245, 245, 1);
+}
+
+/*テーブル基本設定*/
+thead, tbody td{
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/*フラッシュメッセージ*/
+.flash{
+  border-radius: 4px;
+  position: fixed;
+  left: 50%; /* 親幅の中央に配置 */
+  transform: translateX(-50%); /* 自身の幅の半分左へ移動して中央寄せ */
+  z-index: 1000; /* 他の要素より前面に出す（任意） */
+  bottom: 2%;
+
+  padding: 10px 20px;
+
+  text-align: center;
+  white-space: nowrap;
+}
+
+.flash.notice{
+  background-color: black;
+  color: white;
+}
+
+.flash.alert{
+  background-color: #dc143c;
+  color: white;
+}
+
+/*現状使ってないアラーム*/
+.flash.error{
+  background-color: #dc143c;
+  color: black;
+  
+}
+
+/*フォーム入力時のエラー*/
+.new-edit-error{
+  color: red;
+  font-size: 85%;
+}
+
+/*モーダル用*/
+.modal {
+  display: none; /* デフォルトでは非表示に設定 */
+  position: fixed; /* モーダルがページ全体に固定されるように設定 */
+  top: 0; /* ページの最上部からスタート */
+  left: 0; /* ページの最左端からスタート */
+  width: 100vw; /* モーダルが画面全体の幅を占める */
+  max-width: 100vw; /*幅いっぱいに広がらないので追加したコード。ついでにwidth100％→100vwにした*/
+  height: 100%; /* モーダルが画面全体の高さを占める */
+  background-color: rgba(0, 0, 0, 0.4); /* 背景を半透明の黒に設定（モーダルの背後が見えるように） */
+}
+
+.modal-header,.modal-footer {
+  border: none;
+}
+
+.modal-body {
+  border-top: none ;
+  border-bottom: none ;
+}
+

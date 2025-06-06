@@ -1,0 +1,8 @@
+<% width = local_assigns[:size] || 40 %>
+<!--上記コードは、= size だけだと、値を渡さない場合に変数そのものがないと判断されエラーになる -->
+
+<% if @user.image.attached? %>
+  <%= image_tag @user.image.variant(resize_to_limit: [width, width]), class:"rounded-circle" %>
+  <% else %>
+    <%= image_tag "default_avatar.png", class: "rounded-circle", size: "#{width}x#{width}" %>
+<% end %>

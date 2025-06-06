@@ -1,0 +1,46 @@
+<!--引数について、obj1:roomかreservationが入る。obj2:"施設"か"予約"が入る -->
+<!--obj3(オプション):reservation.roomだけが入る(部屋画像取り出すため用) -->
+
+<!--モーダル本体用のコード-->
+  <div class="modal " id="exampleModal-<%= obj1.id %>" tabindex="-1" aria-labelledby="exampleModalLabel-<%= obj1.id %>" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-4" id="exampleModalLabel-<%= obj1.id %>">以下の<%= obj2 %>を削除しますか？</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-3 ">
+              <!--以下、引数としてobj3を用意し、なおかつビュー側で渡さなくてもエラーにならないコード -->
+              <% if defined?(obj3) && obj3.present? %>
+                <!--obj3にはreservation.roomが入る。reservationだとエラーになる -->
+                <%= render "shared/room_image_attached", size: 80, obj: obj3 %>
+              <% else %>
+                <%= render "shared/room_image_attached", size: 80, obj: obj1 %>
+              <% end %>
+            </div>
+            <div class="col-9 ">
+              <% if defined?(obj3) && obj3.present? %>
+                <!--obj1: reservationの場合 -->
+                <div>予約ID:<%= obj1.id %></div>
+                <div><%= obj1.room.name %></div>         
+                <div><%= obj1.check_in.strftime("%Y/%m/%d") %>〜<%= obj1.check_out.strftime("%Y/%m/%d") %></div>     
+                <div>¥<%= number_with_delimiter(obj1.room.price * obj1.number_of_people)%></div>     
+              <% else %>
+                <!--obj1: roomの場合 -->
+                <div>施設ID:<%= obj1.id %></div>    
+                <div><%=obj1.name %></div>
+                <div>¥<%= number_with_delimiter(obj1.price)%>~ /日</div>
+              <% end %>
+            </div>
+          </div>
+          <p>よろしければ「削除」ボタンを押してください。</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">キャンセル</button>
+          <%= link_to "削除", obj1, method: :delete, class: "btn btn-danger", style:"color: white;"%>
+        </div>
+      </div>
+    </div>
+  </div>

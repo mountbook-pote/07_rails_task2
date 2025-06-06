@@ -1,0 +1,68 @@
+/*ボタン要素*/
+
+/*保存ボタン：bootstrap用のカスタムボタン*/
+.btn-save {
+  background-color: #20b2aa !important; /* 任意の色 */
+  border-color: #20b2aa !important;
+  color: #fff !important;
+}
+
+/*キャンセルボタン*/
+.btn-outline-secondary{
+  background-color: transparent !important;
+  color: #6c757d !important;
+  border-color: #6c757d !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+/*通常リンクボタン*/
+.linkto_normal{
+  color: #000080 ; 
+  text-decoration: none !important;
+}
+
+/*3点リーダボタン*/
+.threedot-button, .threedot-button:hover{
+  border: none !important;
+  background-color: rgba($color: #000000, $alpha: 0) !important;
+  color: black !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+/*アカウント設定内のアカウント＆プロフィールボタン*/
+.button_noneaction_primary:hover{
+  /* !important付けないと、クリックしたままだと変化する*/
+  background-color: transparent !important;
+  color: #0d6efd !important;
+  border-color: #0d6efd !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+/* 施設＆予約のドロップダウンメニュー内の内側の余白を調整 */
+.dropdown-menu {
+  padding: 0.25rem 0.5rem; /* 上下左右を少し狭く */
+  min-width: auto; /* Bootstrapはmin-width: 10remがデフォルト */
+  width: max-content; /* 中身の長さに合わせて幅を自動調整 */
+}
+
+/*(課題１流用で今回用途に沿ってないかも)以下は削除のbuttonの文字をlink_toのものに可能な限り擬態させるCSS*/
+.btn-link.displaymodal{
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: #000080; 
+  line-height: inherit;
+  vertical-align: baseline;
+  display: inline; /* または inline-block に統一 */
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn.btn-link:hover{
+  color: var(--bs-link-hover-color); /*bootstrap5で使用しているlink_toのホバー文字カラーとのこと*/
+}

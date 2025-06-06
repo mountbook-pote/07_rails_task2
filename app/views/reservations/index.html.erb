@@ -1,0 +1,47 @@
+<h1>予約済み一覧</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th> 
+      <th>紹介文</th>
+      <th>合計料金</th> <!-- 後で修正-->
+      <th>チェックイン</th>
+      <th>チェックアウト</th>
+      <th>予約確定日時</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= render "shared/room_image_attached", size: 80, obj: reservation.room %></td>
+        <td><%= link_to "#{reservation.room.name}", reservation.room, class: "linkto_normal" %></td>
+        <td><%= reservation.room.content %></td>
+        <td>¥<%= number_with_delimiter(reservation.room.price * reservation.number_of_people)%></td>
+        <td><%= reservation.check_in.strftime("%Y/%m/%d") %></td>
+        <td><%= reservation.check_out.strftime("%Y/%m/%d") %></td>
+        <td><%= reservation.updated_at.strftime("%Y/%m/%d %H:%M") %></td>
+        <td>
+          <div class="dropdown">
+              <button type="button" class="btn btn-secondary threedot-button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              &#x22EE;
+              </button>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "再予約", [:edit, reservation], class: "linkto_normal" %></li>
+                  <li>
+                    <!-- 以下はlink_to "削除"に使用するモーダル起動パーシャル-->
+                    <%= render "shared/trigger_modal", class: "dropdown-item", obj1: reservation, obj2: "予約" %>
+                  </li>   
+                </ul>
+          </div>           
+        </td>
+      </tr>
+      <!-- 以下は上記のモーダル用パーシャル。tdやli内にモーダルを置くとDOMに正しく配置されず不具合起こすことがあるそう-->
+      <!--引数のobj3はオプション扱い。入れる場合は「reservation.room」だけを入れる -->
+      <%= render "shared/display_modal", obj1: reservation, obj2: "予約", obj3: reservation.room %>
+    <% end %>
+  </tbody>
+</table>

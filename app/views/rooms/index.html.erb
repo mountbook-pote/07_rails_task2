@@ -1,0 +1,33 @@
+<%= render "shared/search_form" %>
+
+<% if @rooms.present? %>
+  <h3>検索結果</h3>
+  <p><%= @rooms.size%>件が見つかりました。</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>画像</th>          
+          <th>施設名</th>
+          <th>住所</th>
+          <th>紹介文</th>
+          <th>料金</th>
+          <th>詳細</th>
+        </tr>
+      </thead>
+      <tbody>
+          <!--検索結果「だけ」を繰り返し表示させるため、tbody内に書く -->
+          <% @rooms.each do |room| %>
+          <tr>
+            <td><%= render "shared/room_image_attached", size: 80, obj: room %></td>
+            <td><%= room.name %></td>
+            <td><%= room.adress %></td>
+            <td><%= room.content %></td>
+            <td>¥<%= number_with_delimiter(room.price)%>~</td>
+            <td><%= link_to "詳細", room, class: "linkto_normal" %></td>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
+<% else %>
+  <p>検索結果はありません</p>
+<% end %>

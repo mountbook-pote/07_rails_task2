@@ -41,7 +41,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '4.2.1' #rails gコマンドのエラー対策用。元々あったものにバージョンを指定した
 end
 
 group :test do
@@ -56,7 +56,21 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #以下新規に追加
-
 gem 'concurrent-ruby', '1.3.4' #rails -vできない時に、1.3.5削除してインストールする
 
 gem 'psych', '~> 3.1' #webpackerインストールに必要なコード
+
+gem 'bigdecimal' #db:migrate時の一部エラー対策用
+
+gem 'mutex_m'  #db:migrate時の一部エラー対策用
+
+gem 'devise' #ログイン/ログアウトなどの認証機能を提供するgem
+
+gem 'rails-i18n' #railsのよく使われる翻訳一式とのこと
+
+gem 'devise-i18n' #deviseのよく使われる翻訳一式とのこと
+
+gem "image_processing", "~> 1.2" #画像処理を行うためのgem
+
+gem 'ransack' #検索機能をつけられる
+

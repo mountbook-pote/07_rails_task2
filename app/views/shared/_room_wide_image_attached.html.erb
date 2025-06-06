@@ -1,0 +1,7 @@
+<div class= "text-center mb-3">
+  <% if obj.image.attached? %>
+    <%= image_tag obj.image, class: "w-100", style:"max-width: 500px" %>
+  <% else %>
+    <%= image_tag "default-image-hotel.png", class: "w-100", style:"max-width: 500px" %>
+  <% end %>
+</div>
